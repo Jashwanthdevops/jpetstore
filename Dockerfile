@@ -14,14 +14,14 @@
 #    limitations under the License.
 #
 
-# Stage 1: Build Java app
+# Build stage
 FROM maven:3.9-eclipse-temurin-17 AS build
 
 WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
 
-# Stage 2: Run app
+# Runtime stage
 FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
