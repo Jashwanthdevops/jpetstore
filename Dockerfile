@@ -14,8 +14,13 @@
 #    limitations under the License.
 #
 
-FROM openjdk:17
-WORKDIR /app
-COPY target/*.jar app.jar
-ENTRYPOINT ["java","-jar","app.jar"]
+FROM eclipse-temurin:17-jdk
 
+# Create working directory
+WORKDIR /app
+
+# Copy jar file
+COPY target/*.jar app.jar
+
+# Run application
+ENTRYPOINT ["java","-jar","app.jar"]
