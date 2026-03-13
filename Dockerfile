@@ -14,13 +14,17 @@
 #    limitations under the License.
 #
 
+# Stage 1: Build Java app
+FROM maven:3.9-eclipse-temurin-17 AS build
+
+WORKDIR /app
+COPY . .
+RUN mvn clean package -DskipTests
+
+# Stage 2: Run app
 FROM eclipse-temurin:17-jdk
 
-# Create working directory
 WORKDIR /app
+COPY --from=build /app/target/*.jar app.jar
 
-# Copy jar file
-COPY target/*.jar app.jar
-
-# Run application
 ENTRYPOINT ["java","-jar","app.jar"]
