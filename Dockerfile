@@ -14,7 +14,8 @@
 #    limitations under the License.
 #
 
-FROM tomcat:8-jre8 
-MAINTAINER "Vcube"
-COPY ./target/jpetstore.war /usr/local/tomcat/webapps
-EXPOSE 8080 
+FROM openjdk:17
+WORKDIR /app
+COPY target/*.jar app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
+
