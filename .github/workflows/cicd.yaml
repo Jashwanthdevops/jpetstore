@@ -29,14 +29,14 @@ jobs:
       run: mvn clean package -DskipTests
 
     - name: Build Docker Image
-      run: docker build -t $ECR_REPOSITORY .
+      run: docker build -t ${{ env.ECR_REPOSITORY }}:latest .
 
     - name: Run Trivy Security Scan
       uses: aquasecurity/trivy-action@master
       with:
-        image-ref: $ECR_REPOSITORY
+        image-ref: ${{ env.ECR_REPOSITORY }}:latest
         format: table
-        exit-code: 0
+        exit-code: 0           
 
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v2
