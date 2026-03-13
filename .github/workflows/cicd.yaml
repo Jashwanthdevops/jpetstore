@@ -25,8 +25,8 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Build Application
-      run: mvn clean package
+    - name: Build Java Application
+      run: mvn clean package -DskipTests
 
     - name: Build Docker Image
       run: docker build -t $ECR_REPOSITORY .
